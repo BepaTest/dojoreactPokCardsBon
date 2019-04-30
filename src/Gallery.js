@@ -4,7 +4,7 @@ class Gallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: '',
+      cards: [],
     }
   }
 
@@ -29,33 +29,24 @@ class Gallery extends Component {
   render() {
     const { cards } = this.state
     const { search } = this.props
-    console.log(search)
+
     return (
       <div style={{
         display: 'flex',
         flexWrap: 'wrap',
       }}>
         {
-          cards
-            ? cards.map((card, index) => (
-              (card.name.includes(search)&&search!=='')
-                ?
-                (<div style={{
-                  border: ' solid 2px red'
-                }}><img src={card.imageUrl} alt={card.name} />
-                </div>)
-            :(<div style={{
-                    border: 'grey'
-                  }}>
-                  <img src={card.imageUrl} alt={card.name} />
-                  </div>)
-              
-                  ))
-                  :null
-                }
-      </div>
-                );
+          cards.map((card, index) => (
+            <div style={{
+              border: (card.name.includes(search) && search !== '') ? ' solid 2px red' : 'grey'
+            }}>
+              <img src={card.imageUrl} alt={card.name} />
+            </div>)
+          )
         }
-      }
-      
+      </div>
+    );
+  }
+}
+
 export default Gallery;
